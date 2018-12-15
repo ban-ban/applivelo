@@ -1,0 +1,58 @@
+page-home {
+
+//	ion-card {
+//	    margin: 0 !important;
+//	    width: 100% !important;
+//	}
+
+	
+
+	.conteneur {
+
+		ion-card{
+			position: relative;
+			align-content: center !important;
+			margin: 2px !important;
+			width: 100% !important;
+			border: none !important;
+			box-shadow: 0 0px 0px !important; 
+		}
+
+		ion-card-content{
+			align-content: center !important;
+			margin: 0px !important;
+			width: 100% !important;
+			border: none !important;
+			box-shadow: 0 0px 0px !important;
+		}
+		
+		.new-title {
+			position: absolute;
+			top: 5%;
+			left: 5%;
+			height:22px;
+			width:40px;
+			
+		}
+
+		.product-image {
+			position: absolte;
+			align-content: center;
+			margin: 0px !important;
+			//width: 100% !important;
+		}
+
+		.product-subtitle {
+			position: absolute;
+			top:80%;
+			left: 10%;
+			font-size: 0.9em;
+			// font-weight: bold;
+			width: 100% ;
+			color: #000;
+		}
+		
+	}
+}
+
+

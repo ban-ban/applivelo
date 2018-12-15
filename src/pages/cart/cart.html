@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar>
+<!--    
+    <button ion-button color="dark" icon-start clear (click)="closeModal()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        <ion-title>Mon panier</ion-title>
+    </button>
+-->
+    <ion-title>Mon panier</ion-title>
+  
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<ion-card>
+	  <ion-grid>	
+		<ion-row>
+			<ion-col>Contenu du panier :</ion-col>
+		</ion-row>
+		<ion-row [hidden]="!cartEmpty">
+			<ion-col>panier vide</ion-col>
+		</ion-row>
+	  </ion-grid>		
+	</ion-card>
+
+  <ion-list>
+
+	<ion-item *ngFor="let item of cartItems ; let i = index">
+
+	  
+		<ion-thumbnail item-left>  
+    	  <img [src]=item.product.images[0].src style="height: 70px !important; width: 70px !important" >
+  		</ion-thumbnail>
+ 		<h2>{{ item.product.slug }}</h2>
+ 		<p>qté : {{ item.qty }}</p>
+ 		<p>prix : {{ item.product.price }} euros </p>
+ 	  
+ 	  
+ 		<!-- <p>qté : {{ item.qty }}</p> item.qty * item.product.price-->
+<!-- 		<ion-label item-right>qté :</ion-label>
+ 		<ion-input item-right type="number" [(ngModel)]="quantity[i]" min="1" max="9" (ionBlur)="updateQty(item,i,quantity[i])"></ion-input>
+-->	  
+ 		
+ 		<p style="text-align:right"> ss-total : {{ item.qty * item.product.price}} euros</p>
+
+ 		<button ion-button icon clear bottom color="danger" (click)="removeFromCart(item,i)">
+      		<ion-icon name="close-circle" left> suppr</ion-icon>
+    	</button>
+ 		
+ 		<button ion-button icon right clear bottom color="danger" (click)="modifyQty(item,i)">
+ 			<ion-icon name="code" left> modify qty</ion-icon>
+      		 
+    	</button>
+	 	
+
+		
+	</ion-item>
+  </ion-list>
+
+  <ion-grid>
+  	<ion-card>
+	  <ion-grid>	
+		<ion-row >
+			<ion-col col-4><b>TOTAL</b></ion-col>
+			
+			<ion-col col-8 style="text-align:right">{{total}} euros</ion-col>
+		</ion-row>
+<!--		<ion-row>
+			<button ion-button color="danger" (click)="updateCart">Update cart</button>	 
+		</ion-row>
+-->		
+	  </ion-grid>		
+	</ion-card>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+	<button ion-button block color="danger" (click)="openCheckoutPage()">Commander
+	</button>
+	
+</ion-footer>

@@ -1,0 +1,161 @@
+<ion-header>
+
+  <ion-navbar>
+  	 <ion-title>Check Out</ion-title>
+  	 <ion-buttons end>
+      <button ion-button (click)="openWebSite()">
+        Edit
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="card-background-page">
+
+	 <ion-card>
+      <img src="./assets/images/banner.jpg" />
+      <div class="card-title">LE VELO DE JULES</div>
+      <div class="card-subtitle">le paradis du collectionneur</div>
+      
+    </ion-card>
+	<ion-list>
+		<ion-item-divider color="#585858" style="background-color:#E6E6E6; border-color:#585858 ; border-size:5px;">
+			<p><b>Personal Details</b></p>
+		</ion-item-divider>
+		<ion-item>
+			<ion-label>First Name</ion-label>
+			<ion-input type="text" [(ngModel)]="newOrder.billing.first_name">
+			</ion-input>	
+		</ion-item>
+		<ion-item>
+			<ion-label>Last Name</ion-label>
+			<ion-input type="text" [(ngModel)]="newOrder.billing.last_name">
+			</ion-input>	
+		</ion-item>
+		<ion-item>
+			<ion-label>Email</ion-label>
+			<ion-input [disabled]="true" type="email" [(ngModel)]="newOrder.email" (ionBlur)="checkEmail()">
+			</ion-input>	
+		</ion-item>
+		<ion-item>
+			<ion-label>User Name</ion-label>
+			<ion-input [disabled]="true" type="text" [(ngModel)]="newOrder.username">
+			</ion-input>	
+		</ion-item>
+		
+	<!--                BILLING DETAILS                          -->
+	
+		<ion-item-divider color="#585858" style="background-color:#E6E6E6; border-color:#585858 ; border-size:5px;"><p><b>Billing Details</b></p>
+		</ion-item-divider>
+		
+		<ion-item>
+			<ion-label>Address line 1</ion-label>
+			<ion-textarea type="text" maxlength="80" [(ngModel)]="newOrder.billing.address_1">
+			</ion-textarea>
+		</ion-item>	
+		<ion-item>
+			<ion-label>Address line 2</ion-label>
+			<ion-textarea type="text" maxlength="80" [(ngModel)]="newOrder.billing.address_2">
+			</ion-textarea>
+		</ion-item>
+		
+		<ion-item>
+			<ion-label>City</ion-label>
+			<ion-input type="text" [(ngModel)]="newOrder.billing.city">
+			</ion-input>	
+		</ion-item>
+		<ion-item>
+			<ion-label>Postal Code</ion-label>
+			<ion-input type="number" [(ngModel)]="newOrder.billing.postcode" min="0" >
+			<!--<ion-input type="number" clearInput [(ngModel)]="newOrder.billing.postal_code">	-->
+			</ion-input>	
+		</ion-item>
+		<ion-item>
+			<ion-label>Country</ion-label>
+			<ion-select [(ngModel)]="newOrder.billing.country">
+				<ion-option value="France" selected="false">France</ion-option>
+				<ion-option value="Germany" selected="false">Germany</ion-option>
+				<ion-option value="US" selected="false">USA</ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-label>Phone Number</ion-label>
+			<ion-input type="tel" [(ngModel)]="newOrder.billing.phone">
+			</ion-input>	
+		</ion-item>	
+
+		
+
+		<!-- SHIPPING DETAILS will appear if checkbox unchecked -->
+
+		<ion-item-divider  color="#585858" style="background-color:#E6E6E6; border-color:#585858 ; border-size:5px;"><p><b>Shipping Details</b></p>
+		</ion-item-divider>
+
+		<ion-item >
+			<ion-label>First Name</ion-label>
+			<ion-input type="text" [(ngModel)]="newOrder.shipping.first_name">
+			</ion-input>	
+		</ion-item>
+		<ion-item >
+			<ion-label>Last Name</ion-label>
+			<ion-input type="text" [(ngModel)]="newOrder.shipping.last_name">
+			</ion-input>	
+		</ion-item>
+		<ion-item >
+			<ion-label>Address line 1</ion-label>
+			<ion-textarea type="text" maxlength="80" [(ngModel)]="newOrder.shipping.address_1">
+			</ion-textarea>
+		</ion-item>	
+		<ion-item >
+			<ion-label>Address line 2</ion-label>
+			<ion-textarea type="text" maxlength="80" [(ngModel)]="newOrder.shipping.address_2">
+			</ion-textarea>
+		</ion-item>
+		
+		<ion-item >
+			<ion-label>City</ion-label>
+			<ion-input type="text" [(ngModel)]="newOrder.shipping.city">
+			</ion-input>	
+		</ion-item>
+		<ion-item >
+			<ion-label>Postal Code</ion-label>
+			<ion-input type="number" clearInput [(ngModel)]="newOrder.shipping.postcode" min="0">
+			</ion-input>	
+		</ion-item>
+		<ion-item >
+			<ion-label>Country</ion-label>
+			<ion-select [(ngModel)]="newOrder.shipping.country">
+				<ion-option value="France" selected="false">France</ion-option>
+				<ion-option value="Germany" selected="false">Germany</ion-option>
+				<ion-option value="US" selected="false">USA</ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item >
+			<ion-label>Phone Number</ion-label>
+			<ion-input type="tel" clearInput [(ngModel)]="newOrder.shipping.phone">
+			</ion-input>	
+		</ion-item>	
+<!-- *ngIf="!billing_equals_shipping"  -->
+<!-- payment method -->
+		<ion-item-divider color="#585858" style="background-color:#E6E6E6; border-color:#585858 ; border-size:5px;"><p><b>Select Payment Details</b></p>
+		</ion-item-divider>
+		
+		<ion-item>
+			<ion-label>Payment Method</ion-label>
+			<ion-select [(ngModel)]="paymentMethod">
+				<!-- <ion-option *ngFor="let p of paymentMethods" value="{{p.method_id}}">{{p.method_title}}</ion-option> -->
+				<ion-option value="paypal" selected="false">Paypal</ion-option>
+				<ion-option value="cheque" selected="false">Chèque</ion-option>
+				
+			</ion-select>
+		</ion-item>
+	</ion-list>
+
+</ion-content>
+
+<ion-footer>
+	<button ion-button block color="danger" (click)="placeOrder()">Confirm details and check order
+	</button>
+</ion-footer>

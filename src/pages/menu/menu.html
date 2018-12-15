@@ -1,0 +1,59 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar center>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="card-background-page">
+
+    <ion-card>
+      <img src="./assets/images/banner.jpg" />
+      <div class="card-title">LE VELO DE JULES</div>
+      <div class="card-subtitle">le paradis du collectionneur</div>
+      
+    </ion-card>
+  
+    <ion-list no-lines>
+      <ion-item *ngFor="let mycategory of categories" text_wrap (click)="openCategoryPage(mycategory.id,mycategory.slug)" menuClose>
+        <ion-thumbnail item-left>  
+           <img [src]=mycategory.image.src />
+        </ion-thumbnail>
+        <h2>{{ mycategory.slug }}</h2>
+        <p>{{ mycategory.description }}</p>
+        
+        <button ion-button icon clear item-right>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+      <ion-item (click)="openHomePage()">
+        <h2>tous les produits</h2>
+      </ion-item> 
+
+      <ion-card>
+      <img src="./assets/images/bannerthin.png" />
+      <div class="card-text">My account</div>
+    </ion-card>
+    
+      <ion-item  (click)="openSignupPage()" *ngIf="!loggedIn" menuClose>
+        <h2>Sign up</h2>
+      </ion-item>  
+      <ion-item   (click)="openLoginPage()" *ngIf="!loggedIn" menuClose>
+        <h2>Log in</h2>
+      </ion-item>
+      <ion-item    *ngIf="loggedIn">
+        <h2>Welcome {{user.username}} </h2>
+      </ion-item>  
+      <ion-item   (click)="openCartPage()" *ngIf="loggedIn" menuClose>
+        <h2>My Cart</h2>
+      </ion-item>  
+      <ion-item   (click)="openLogoutPage()" *ngIf="loggedIn" menuClose>
+        <h2>Log out</h2>
+      </ion-item>    
+    </ion-list>
+
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="homePage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,65 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ product.slug }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-fab right top edge (click)="openCart()">
+        <button ion-fab color="danger">
+            <ion-icon name="cart"></ion-icon>
+        </button>
+    </ion-fab>
+
+
+	<ion-card>
+     <ion-slides autoplay="3000" loop="true" pager>
+      <ion-slide *ngFor="let image of product.images">
+        <img [src]="image.src">
+      </ion-slide>
+     </ion-slides>
+
+     <ion-card-content>
+     	
+     	<ion-card-title>
+     	  {{ product.slug }} &nbsp;
+     	</ion-card-title>
+     	
+ <!--    	<ion-chip *ngFor="let cat of product.categories" style="margin-left: 5px">
+     		<ion-label color="secondary"> {{ cat.slug }}</ion-label>
+     	</ion-chip>
+  -->     
+     	
+     	<p [innerHTML]="product.description"></p>
+        <br />
+        <p>Prix : {{product.price}} euros</p>
+        <br />
+     	
+     	<button ion-button icon-start block outline color="danger" (click)="addToCart(product)">
+           <ion-icon name="basket"></ion-icon> Ajouter au panier
+        </button>
+
+     </ion-card-content> 
+    </ion-card>
+
+    <ion-card *ngIf="product.attributes.length > 0">
+    	<ion-card-content>
+    		<ion-card-title>
+    			Caractéristiques
+    		</ion-card-title>
+
+    		<ion-grid>
+    			<ion-row *ngFor="let att of product.attributes">
+    				<ion-col col=4>
+    					{{ att.name }}
+    				</ion-col>
+    				<ion-col col=8>
+    					<span *ngFor="let option of att.options">{{ option }}</span>
+    				</ion-col>
+    			</ion-row>
+    		</ion-grid>
+    	</ion-card-content>
+    </ion-card>
+</ion-content>

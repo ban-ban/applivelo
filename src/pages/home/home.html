@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar >
+   
+  <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>Home</ion-title>
+   
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding class="card-background-page">
+   <ion-card>
+      <img src="./assets/images/banner.jpg" />
+      <div class="card-title">LE VELO DE JULES</div>
+      <div class="card-subtitle">le paradis du collectionneur</div>
+      
+    </ion-card>
+<!--  <ion-card>
+  <ion-slides loop="true" autoplay="3000" pager>
+    <ion-slide *ngFor="let number of ['velo1','velo2','velo3','velo4']">
+      <img src="./assets/images/{{number}}.jpg"/>
+    </ion-slide>
+    
+  </ion-slides>
+</ion-card>
+-->
+<ion-grid no-padding>
+  <ion-row>
+    <ion-col col-1></ion-col>
+    <ion-col col-11>
+    <ion-slides  #productSlides >
+      <ion-slide no-padding class="conteneur" *ngFor="let product of products">
+        <ion-card no-padding >
+          <ion-card-content no-padding>
+           
+             
+               <img class="new-title" src='./assets/images/new.png'/>
+               
+               <img class="product-image" [src]=product.images[0].src style="max-height: 135px !important;"/>
+           <!--    <p no-padding class="product-subtitle">{{ product.slug }}</p>  -->
+             
+           
+
+           </ion-card-content>
+          
+         
+          <!-- Solution trouvée pour centrer l'image
+         
+        -->
+
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </ion-col>
+ 
+  </ion-row>
+</ion-grid>
+<hr>
+
+<ion-list no-lines>
+  <ion-item *ngFor="let product of moreProducts" text_wrap (click)="openProductPage(product)">
+    <ion-thumbnail item-left>  
+      <img [src]=product.images[0].src />
+    </ion-thumbnail>
+    <h2>{{ product.slug }}</h2>
+    <p>
+      <span [innerHTML]="product.short_description.substr(0,25) + '...'"></span>
+      <span [innerHTML]="product.price_html"></span>
+    </p>
+    <button ion-button icon clear item-right>
+      <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+
+  </ion-item>   
+</ion-list>
+
+<ion-infinite-scroll (ionInfinite)="loadMoreProducts($event)">
+  <ion-infinite-scroll-content></ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+</ion-content>
+
